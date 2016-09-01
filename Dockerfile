@@ -3,7 +3,7 @@ FROM sequenceiq/hadoop-docker:latest
 RUN yum -y install wget
 #install HBase
 RUN cd usr/local/ && wget http://www.interior-dsgn.com/apache/hbase/stable/hbase-1.2.2-hadoop2-bin.tar.gz \
-	tar -zxvf hbase-1.2.2-hadoop2-bin.tar.gz
+	&& tar -xzvf hbase-1.2.2-hadoop2-bin.tar.gz
 ENV HBASE_HOME /usr/local/hbase-1.2.2-hadoop2-bin
 ENV PATH $HBASE_HOME/bin:$PATH
 #install Hive
