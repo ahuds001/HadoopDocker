@@ -4,7 +4,7 @@ RUN yum -y install wget
 #install HBase
 RUN cd usr/local/ && wget http://apache.claz.org/hbase/stable/hbase-1.2.2-bin.tar.gz \
 	&& tar -xzvf hbase-1.2.2-bin.tar.gz
-ENV HBASE_HOME /usr/local/hbase-1.2.2-bin
+ENV HBASE_HOME /usr/local/hbase-1.2.2
 ENV PATH $HBASE_HOME/bin:$PATH
 #install Hive
 RUN cd /usr/local/ && wget  http://apache.claz.org/hive/hive-2.1.0/apache-hive-2.1.0-bin.tar.gz && \
@@ -33,4 +33,6 @@ ENV ANACONDA_HOME /usr/local/anaconda
 RUN cd /usr/local && wget http://repo.continuum.io/archive/Anaconda2-4.1.1-Linux-x86_64.sh \
 	&& bash Anaconda2-4.1.1-Linux-x86_64.sh -b -p $ANACONDA_HOME 
 ENV PATH $ANACONDA_HOME/bin:$PATH
+#Initialize Hive DB
+RUN mkdir /home/HiveDB && cd /home/HiveDB && schematool -initSchema -dbType derby
 ENTRYPOINT ["/etc/bootstrap.sh"]
